@@ -1,0 +1,25 @@
+.hidden {
+  display: none !important;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+}
+
+.column-three {
+  background-color: #9fd6ed;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.column-three > div {
+  font-size: 35px;
+}
+
+body {
+  background-color: #e6f0f0;
+}
