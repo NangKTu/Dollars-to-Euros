@@ -10,6 +10,8 @@ const exchangeCurrencyText =
     ? $exchangeCurrency.options[exchangeCurrencyIndex].value
     : '';
 
+const $exchangeRate = document.querySelector('.exchange-rate');
+
 function getRate(currency1, currency2) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -42,12 +44,21 @@ function getRate(currency1, currency2) {
   });
 }
 
-const $exchangeRate = document.querySelector('.exchange-rate');
+function updateExchangeRate() {
+  const baseCurrencyText = $baseCurrency.value;
+  const exchangeCurrencyText = $exchangeCurrency.value;
 
-getRate(baseCurrencyText, exchangeCurrencyText)
-  .then((exchangeRate) => {
-    $exchangeRate.textContent = exchangeRate;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+  getRate(baseCurrencyText, exchangeCurrencyText)
+    .then((exchangeRate) => {
+      $exchangeRate.textContent = exchangeRate;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+$baseCurrency.addEventListener('change', updateExchangeRate);
+$exchangeCurrency.addEventListener('change', updateExchangeRate);
+
+// Initial update based on default values
+updateExchangeRate();
