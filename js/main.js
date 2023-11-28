@@ -62,3 +62,6 @@ $exchangeCurrency.addEventListener('change', updateExchangeRate);
 
 // Initial update based on default values
 updateExchangeRate();
+
+const addBtn = document.querySelector('#add');
+console.log(addBtn);
