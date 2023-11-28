@@ -1,0 +1,27 @@
+.column {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.base-currency,
+.base-currency-rate,
+.exchange-currency,
+.exchange-rate,
+.add {
+  flex: 1;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 20px;
+}
+
+.add {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.exchange-rate,
+.base-currency-rate {
+  margin-left: 10%;
+}
