@@ -1,16 +1,10 @@
 const $baseCurrency = document.querySelector('.base-currency');
-const baseCurrencyIndex = $baseCurrency.selectedIndex;
-const baseCurrencyText =
-  baseCurrencyIndex >= 0 ? $baseCurrency.options[baseCurrencyIndex].value : '';
-
+const $baseCurrencyRate = document.querySelector('.base-currency-rate');
 const $exchangeCurrency = document.querySelector('.exchange-currency');
-const exchangeCurrencyIndex = $exchangeCurrency.selectedIndex;
-const exchangeCurrencyText =
-  exchangeCurrencyIndex >= 0
-    ? $exchangeCurrency.options[exchangeCurrencyIndex].value
-    : '';
-
 const $exchangeRate = document.querySelector('.exchange-rate');
+
+const $addToWatchlistBtn = document.getElementById('add-button');
+const $watchlist = document.getElementById('watchlist');
 
 function getRate(currency1, currency2) {
   return new Promise((resolve, reject) => {
@@ -63,5 +57,49 @@ $exchangeCurrency.addEventListener('change', updateExchangeRate);
 // Initial update based on default values
 updateExchangeRate();
 
-const addBtn = document.querySelector('#add');
-console.log(addBtn);
+function saveWatchlistData(bcText, bcRate, exText, exRateText) {
+  console.log('function fires as expected');
+  const watchlistData = {
+    bcText,
+    bcRate,
+    exText,
+    exRateText,
+  };
+  data.entries.push(watchlistData);
+}
+
+$addToWatchlistBtn.addEventListener('click', addToWatchlist);
+
+function addToWatchlist() {
+  const bcText = $baseCurrency.value;
+  const bcRate = $baseCurrencyRate.textContent;
+  const exText = $exchangeCurrency.value;
+  const exRateText = $exchangeRate.textContent;
+
+  saveWatchlistData(bcText, bcRate, exText, exRateText);
+}
+
+function renderEntry(entry) {
+  const listItem = document.createElement('li');
+  const listContent = document.createElement('div');
+  const sourceElement = document.createElement('p');
+  const exchangeElement = document.createElement('p');
+
+  sourceElement.textContent = `${entry.bcText}:   ${entry.bcRate}`;
+  exchangeElement.textContent = `${entry.exText}:   ${entry.exRateText}`;
+
+  listContent.appendChild(sourceElement);
+  listContent.appendChild(exchangeElement);
+  listItem.appendChild(listContent);
+
+  return listItem;
+}
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  $watchlist.innerHTML = '';
+  for (let i = 0; i < data.entries.length; i++) {
+    const entry = data.entries[i];
+    const renderedEntry = renderEntry(entry);
+    $watchlist.appendChild(renderedEntry);
+  }
+});
