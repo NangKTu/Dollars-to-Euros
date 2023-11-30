@@ -25,3 +25,7 @@
 .base-currency-rate {
   margin-left: 20%;
 }
+
+ul {
+  list-style: none;
+}
