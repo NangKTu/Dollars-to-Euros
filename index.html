@@ -15,7 +15,7 @@
   <body>
     <header>
       <div class="column-three">
-        <div class="icons" id="home">
+        <div class="icons" id="house">
           <i class="fa-solid fa-house"></i>
         </div>
         <div class="title">
@@ -27,30 +27,34 @@
       </div>
     </header>
     <main>
-      <div class="column" id="box-1">
-        <select class="base-currency" id="base-currency-ticker">
-          <option value="usd">USD</option>
-          <option value="jpy">JPY</option>
-          <option value="gbp">GBP</option>
-          <option value="cad">CAD</option>
-          <option value="eur">EUR</option>
-        </select>
-        <p class="base-currency-rate">1</p>
+      <div data-view="home-page" id="home-page">
+        <div class="column" id="box-1">
+          <select class="base-currency" id="base-currency-ticker">
+            <option value="usd">USD</option>
+            <option value="jpy">JPY</option>
+            <option value="gbp">GBP</option>
+            <option value="cad">CAD</option>
+            <option value="eur">EUR</option>
+          </select>
+          <p class="base-currency-rate">1</p>
+        </div>
+        <div class="column" id="box-2">
+          <select class="exchange-currency" id="currency-ticker">
+            <option value="eur">EUR</option>
+            <option value="jpy">JPY</option>
+            <option value="gbp">GBP</option>
+            <option value="cad">CAD</option>
+            <option value="usd">USD</option>
+          </select>
+          <p class="exchange-rate" id="api-data">0.9</p>
+          <button id="add-button">Add to Watchlist</button>
+        </div>
       </div>
-      <div class="column" id="box-2">
-        <select class="exchange-currency" id="currency-ticker">
-          <option value="eur">EUR</option>
-          <option value="jpy">JPY</option>
-          <option value="gbp">GBP</option>
-          <option value="cad">CAD</option>
-          <option value="usd">USD</option>
-        </select>
-        <p class="exchange-rate" id="api-data">0.9</p>
-        <button id="add-button">Add to Watchlist</button>
-      </div>
-      <div class="watchlistpage">
-        <h2>Watchlist</h2>
-        <ul id="watchlist"></ul>
+      <div data-view="watchlist-page" class="hidden" id="watchlist-page">
+        <div class="watchlistpage">
+          <h2>Watchlist</h2>
+          <ul id="watchlist"></ul>
+        </div>
       </div>
     </main>
     <script src="js/data.js"></script>

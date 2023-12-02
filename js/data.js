@@ -1,6 +1,7 @@
 /* exported data */
 let data = {
   entries: [],
+  currentView: 'home-page',
 };
 
 function saveToLocalStorage() {

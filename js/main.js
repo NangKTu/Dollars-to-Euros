@@ -6,6 +6,11 @@ const $exchangeRate = document.querySelector('.exchange-rate');
 const $addToWatchlistBtn = document.getElementById('add-button');
 const $watchlist = document.getElementById('watchlist');
 
+const $homeBtn = document.getElementById('house');
+const $watchlistBtn = document.getElementById('eye');
+const $homepage = document.getElementById('home-page');
+const $watchlistPage = document.getElementById('watchlist-page');
+
 function getRate(currency1, currency2) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -95,6 +100,30 @@ function renderEntry(entry) {
   return listItem;
 }
 
+function updateView(viewName) {
+  console.log('function fired');
+  console.log(viewName);
+  if (viewName === 'homepage') {
+    $homepage.classList.remove('hidden');
+    $watchlistPage.classList.add('hidden');
+  } else if (viewName === 'watchlist-page') {
+    console.log('here');
+    $watchlistPage.classList.remove('hidden');
+    $homepage.classList.add('hidden');
+    renderEntry();
+  }
+}
+
+function switchToHomepage() {
+  data.currentView = 'homepage';
+  updateView('homepage');
+}
+
+function switchToWatchlist() {
+  data.currentView = 'watchlist-page';
+  updateView('watchlist-page');
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
   $watchlist.innerHTML = '';
   for (let i = 0; i < data.entries.length; i++) {
@@ -102,4 +131,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const renderedEntry = renderEntry(entry);
     $watchlist.appendChild(renderedEntry);
   }
+  // Event listener for home button
+  $homeBtn.addEventListener('click', switchToHomepage);
+  // Event listener for watchlist button
+  $watchlistBtn.addEventListener('click', switchToWatchlist);
 });
