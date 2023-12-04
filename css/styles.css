@@ -40,6 +40,10 @@ ul {
 li > div {
   background-color: beige;
   width: 100px;
-  height: 75px;
-  margin: 0 20px;
+  height: fit-content;
+  margin: 0 30px;
+}
+
+.remove-button {
+  margin-left: 15px;
 }

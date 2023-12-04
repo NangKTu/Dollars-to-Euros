@@ -63,7 +63,6 @@ $exchangeCurrency.addEventListener('change', updateExchangeRate);
 updateExchangeRate();
 
 function saveWatchlistData(bcText, bcRate, exText, exRateText) {
-  console.log('function fires as expected');
   const watchlistData = {
     bcText,
     bcRate,
@@ -89,25 +88,26 @@ function renderEntry(entry) {
   const listContent = document.createElement('div');
   const sourceElement = document.createElement('p');
   const exchangeElement = document.createElement('p');
+  const removeBtn = document.createElement('button');
 
-  sourceElement.textContent = `${entry.bcText}:   ${entry.bcRate}`;
-  exchangeElement.textContent = `${entry.exText}:   ${entry.exRateText}`;
+  sourceElement.textContent = `${entry.bcText}: ${entry.bcRate}`;
+  exchangeElement.textContent = `${entry.exText}: ${entry.exRateText}`;
+  removeBtn.textContent = 'Remove';
+  removeBtn.classList.add('remove-button');
 
   listContent.appendChild(sourceElement);
   listContent.appendChild(exchangeElement);
+  listContent.appendChild(removeBtn);
   listItem.appendChild(listContent);
 
   return listItem;
 }
 
 function updateView(viewName) {
-  console.log('function fired');
-  console.log(viewName);
   if (viewName === 'homepage') {
     $homepage.classList.remove('hidden');
     $watchlistPage.classList.add('hidden');
   } else if (viewName === 'watchlist-page') {
-    console.log('here');
     $watchlistPage.classList.remove('hidden');
     $homepage.classList.add('hidden');
     renderEntry();
@@ -136,3 +136,24 @@ document.addEventListener('DOMContentLoaded', function (e) {
   // Event listener for watchlist button
   $watchlistBtn.addEventListener('click', switchToWatchlist);
 });
+
+$watchlist.addEventListener('click', function (event) {
+  const removeButton = event.target.closest('.remove-button');
+
+  if (removeButton) {
+    // Get the parent entry and remove it
+    const entry = removeButton.closest('li');
+    removeEntry(entry);
+  }
+});
+
+// Function to remove an entry
+function removeEntry(entry) {
+  // Remove from the page
+  entry.remove();
+
+  // Remove from local storage
+  const index = Array.from($watchlist.children).indexOf(entry);
+  data.entries.splice(index, 1);
+  saveToLocalStorage();
+}
