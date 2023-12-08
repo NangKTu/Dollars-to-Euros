@@ -39,11 +39,19 @@ ul {
 
 li > div {
   background-color: beige;
-  width: 100px;
+  border-style: outset;
+  box-shadow: 10px 10px #aaa;
+  width: 125px;
   height: fit-content;
   margin: 0 30px;
 }
 
+li > div > p,
+li > div > button {
+  padding-left: 10px;
+}
+
 .remove-button {
   margin-left: 15px;
+  border-color: transparent;
 }
